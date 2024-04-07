@@ -2,7 +2,17 @@ POST http://localhost:3333/events
 Content-Type: application/json
 
 {
-    "title": "Unite Summit",
-    "details": "Um evento bacana",
-    "maximumAttendees": 100
+    "title": "Novo evento",
+    "details": null,
+    "maximumAttendees": 1
+}
+
+###
+
+POST http://localhost:3333/events/59a3ac9f-a89a-462d-ac2a-b2f7d4f34704/attendees
+Content-Type: application/json
+
+{
+    "name": "Gabriel Santos",
+    "email": "maginovam@gmail.com"
 }
