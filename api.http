@@ -16,3 +16,19 @@ Content-Type: application/json
     "name": "Gabriel Santos",
     "email": "maginovam@gmail.com"
 }
+
+###
+
+GET http://localhost:3333/events/59a3ac9f-a89a-462d-ac2a-b2f7d4f34704
+
+###
+
+GET http://localhost:3333/attendees/4/badge
+
+###
+
+GET http://localhost:3333/attendees/6/check-in
+
+###
+
+GET http://localhost:3333/events/59a3ac9f-a89a-462d-ac2a-b2f7d4f34704/attendees

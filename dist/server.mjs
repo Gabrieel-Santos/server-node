@@ -1,59 +1,69 @@
+import {
+  registerForEvent
+} from "./chunk-E6P6ZMNT.mjs";
+import {
+  errorHandler
+} from "./chunk-DCZJQNPL.mjs";
+import {
+  checkIn
+} from "./chunk-QGIYE4GG.mjs";
+import {
+  createEvent
+} from "./chunk-I66ULZK6.mjs";
+import "./chunk-KDMJHR3Z.mjs";
+import {
+  getAttendeeBadge
+} from "./chunk-FNRFIFWO.mjs";
+import {
+  getEventAttendees
+} from "./chunk-ZQMQ7RHT.mjs";
+import {
+  getEvent
+} from "./chunk-EUEKKX5X.mjs";
+import "./chunk-JRO4E4TH.mjs";
+import "./chunk-JV6GRE7Y.mjs";
+
+// src/server.ts
 import fastify from "fastify";
 import {
   serializerCompiler,
   validatorCompiler,
-  jsonSchemaTransform,
-  ZodTypeProvider,
+  jsonSchemaTransform
 } from "fastify-type-provider-zod";
-
 import fastifySwagger from "@fastify/swagger";
 import fastifySwaggerUi from "@fastify/swagger-ui";
 import fastifyCors from "@fastify/cors";
-
-import { createEvent } from "./routes/create-event";
-import { registerForEvent } from "./routes/register-for-event";
-import { getEvent } from "./routes/get-event";
-import { getAttendeeBadge } from "./routes/get-attendee-badge";
-import { checkIn } from "./routes/check-in";
-import { getEventAttendees } from "./routes/get-event-attendees";
-import { errorHandler } from "./error-handler";
-
-export const app = fastify().withTypeProvider<ZodTypeProvider>();
-
+var app = fastify().withTypeProvider();
 app.register(fastifyCors, {
-  origin: "*",
+  origin: "*"
 });
-
 app.register(fastifySwagger, {
   swagger: {
     consumes: ["application/json"],
     produces: ["application/json"],
     info: {
       title: "pass.in",
-      description:
-        "Especificacoes da API para o back-end da apliacacao pass.in construida por Gabriel Santos junto com o curso da Rocketseat.",
-      version: "1.0.0",
-    },
+      description: "Especificacoes da API para o back-end da apliacacao pass.in construida por Gabriel Santos junto com o curso da Rocketseat.",
+      version: "1.0.0"
+    }
   },
-  transform: jsonSchemaTransform,
+  transform: jsonSchemaTransform
 });
-
 app.register(fastifySwaggerUi, {
-  routePrefix: "/docs",
+  routePrefix: "/docs"
 });
-
 app.setValidatorCompiler(validatorCompiler);
 app.setSerializerCompiler(serializerCompiler);
-
 app.register(createEvent);
 app.register(registerForEvent);
 app.register(getEvent);
 app.register(getAttendeeBadge);
 app.register(checkIn);
 app.register(getEventAttendees);
-
 app.setErrorHandler(errorHandler);
-
 app.listen({ port: 3333, host: "0.0.0.0" }).then(() => {
   console.log("HTTP server running!");
 });
+export {
+  app
+};
